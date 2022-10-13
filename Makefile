@@ -3,3 +3,6 @@ dev:
 
 dev-down:
 	docker-compose down
+
+start-server:
+	uvicorn app.main:app --reload
