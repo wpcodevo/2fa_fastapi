@@ -105,7 +105,7 @@ def Validate_OTP(payload: schemas.UserRequestSchema):
                             detail="OTP must be verified first")
 
     totp = pyotp.TOTP(user.get("otp_base32"))
-    if not totp.verify(payload.token):
+    if not totp.verify(otp=payload.token, valid_window=1):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail=message)
 
