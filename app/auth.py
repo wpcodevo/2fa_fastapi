@@ -43,12 +43,12 @@ async def Create_User(payload: schemas.UserBaseSchema):
 
 @router.post('/login')
 def Login(payload: schemas.LoginUserSchema):
-    user = userEntity(User.find_one({'email': payload.email.lower()}))
+    user = User.find_one({'email': payload.email.lower()})
     if not user:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail='Incorrect Email or Password')
 
-    return {'status': 'success', 'user': user}
+    return {'status': 'success', 'user': userEntity(user)}
 
 
 @router.post('/otp/generate')
